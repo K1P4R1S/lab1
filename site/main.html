@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>TechHome - магазин техники</title>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <img src="assets/logo.png" alt="TechHome">
+        </div>
+        <form class="search-form" action="/search">
+            <input type="text" name="q" placeholder="Найти технику...">
+            <button type="submit">🔍</button>
+        </form>
+        <nav class="nav-menu">
+            <a href="main.html" class="nav-link">Главная</a>
+            <a href="" class="nav-link">Каталог</a>
+            <a href="about.html" class="nav-link">О нас</a>
+            <a href="" class="nav-link">Контакты</a>
+            <a href="" class="nav-link">Корзина</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Добро пожаловать на главную страницу TechHome!</h1>
+        <p>«Мы не просто продаем бытовую технику, мы подбираем умные решения для вашего ежедневного комфорта. <br>
+            От мощных пылесосов до интеллектуальных кофемашин — каждый девайс в TechHome прошел проверку на надежность и
+            стиль. <br>
+            Сделайте свой дом технологичнее уже сегодня!»
+        </p>
+        <h2>Популярные товары</h2>
+        <section class="product-grid">
+
+            <article class="product-card">
+                <img src="assets/vacuum-cleaner/robot.png" alt="Робот-пылесос">
+                <a href="product-vacuum-cleaner.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-info">
+                        <h3>Робот-пылесос</h3>
+                        <p>Идеальная чистота без усилий</p>
+                        <div class="product-price">19 990 ₽</div>
+                        <button class="buy-button">В корзину</button>
+                    </div>
+                </a>
+            </article>
+            <article class="product-card">
+                <img src="assets/fridge.png" alt="Холодильник">
+                <div class="product-info">
+                    <h3>Холодильник</h3>
+                    <p>Продукты останутся свежими</p>
+                    <div class="product-price">152 999 ₽</div>
+                    <button class="buy-button">В корзину</button>
+                </div>
+            </article>
+            <article class="product-card">
+                <img src="assets/coffee.png" alt="кофемашина">
+                <div class="product-info">
+                    <h3>кофемашина</h3>
+                    <p>Утро начинается с кофе</p>
+                    <div class="product-price">15 999 ₽</div>
+                    <button class="buy-button">В корзину</button>
+                </div>
+            </article>
+            <article class="product-card">
+                <img src="assets/machine.png" alt="Стиральная машина">
+                <div class="product-info">
+                    <h3>Стиральная машина</h3>
+                    <p>Всегда чистая одежда</p>
+                    <div class="product-price">29 999 ₽</div>
+                    <button class="buy-button">В корзину</button>
+                </div>
+            </article>
+            <article class="product-card">
+                <img src="assets/TV.png" alt="Телевизор">
+                <div class="product-info">
+                    <h3>Телевизор</h3>
+                    <p>Ваш личный кинотеатр</p>
+                    <div class="product-price">110 000 ₽</div>
+                    <button class="buy-button">В корзину</button>
+                </div>
+            </article>
+            <article class="product-card">
+                <img src="assets/tea.png" alt="Чайник">
+                <div class="product-info">
+                    <h3>Электрический чайник</h3>
+                    <p>Уют с чашечкой любимого чая</p>
+                    <div class="product-price">3 790 ₽</div>
+                    <button class="buy-button">В корзину</button>
+                </div>
+            </article>
+        </section>
+        <section class="promo-section">
+            <div class="promo-badge">Акция</div>
+            <div class="promo-content">
+                <h3>Скидка 15% на всю мелкую бытовую технику!</h3>
+                <p>Используйте промокод <strong>HOME2026</strong> при оформлении заказа.</p>
+            </div>
+            <button class="promo-button">Узнать больше</button>
+        </section>
+    </main>
+    <footer class="a">
+        <address>
+            <p>fon4ikoff2017@gmail.com</p>
+            <p>Разработчик: Фончиков Евгений Алексеевич</p>
+        </address>
+        <p>&copy; 2026 Все права защищены</p>
+    </footer>
+</body>
+
+</html>

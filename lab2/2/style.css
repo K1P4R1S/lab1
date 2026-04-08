@@ -1,0 +1,21 @@
+.outer-wrapper {
+    background: #C18AB2;
+    background: linear-gradient(315deg, #C18AB2, #B39F65);
+    padding: 20px;
+    display: inline-block;
+    width: 600px;
+}
+
+.close {
+    color: red;
+    font-weight: bolder;
+}
+
+li {
+    list-style-type: none;
+    padding: 5px;
+}
+
+.todo-list input:checked+label {
+    text-decoration: line-through;
+}
