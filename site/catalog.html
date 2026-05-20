@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог товаров - TechHome</title>
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+        .catalog__layout {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            align-items: flex-start;
+        }
+
+        .catalog__sidebar {
+            flex: 0 0 260px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .catalog__grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .catalog__card {
+            width: calc(33.333% - 20px);
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .catalog__card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .catalog__image img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .catalog__info {
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .catalog__title-card {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .catalog__desc {
+            font-size: 0.9rem;
+            color: #666;
+            flex: 1;
+        }
+
+        .catalog__price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #007bff;
+            margin: 15px 0;
+        }
+
+        .catalog__btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .catalog__btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* === ФИЛЬТР (CSS-ONLY) === */
+        .filter__radio {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            width: 0;
+            height: 0;
+        }
+
+        .filter__title {
+            margin: 0 0 20px;
+            font-size: 1.4rem;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .filter__group {
+            border: none;
+            padding: 0;
+            margin: 0 0 20px;
+        }
+
+        .filter__legend {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #444;
+        }
+
+        .filter__label,
+        .filter__radio-label {
+            display: block;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #555;
+            background: #f8f9fa;
+            transition: all 0.2s;
+        }
+
+        .filter__label:hover,
+        .filter__radio-label:hover {
+            background: #e9ecef;
+            color: #007bff;
+        }
+
+        .filter__select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+            font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* :focus для элементов фильтра */
+        .filter__select:focus,
+        .filter__input:focus,
+        .filter__radio:focus~.filter__label {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Логика CSS-фильтра */
+        #cat-kitchen:checked~.catalog__layout .catalog__card:not([data-cat="kitchen"]),
+        #cat-cleaning:checked~.catalog__layout .catalog__card:not([data-cat="cleaning"]),
+        #cat-electronics:checked~.catalog__layout .catalog__card:not([data-cat="electronics"]),
+        #cat-climate:checked~.catalog__layout .catalog__card:not([data-cat="climate"]) {
+            display: none;
+        }
+
+        /* Подсветка активной категории */
+        #cat-all:checked~.catalog__layout label[for="cat-all"],
+        #cat-kitchen:checked~.catalog__layout label[for="cat-kitchen"],
+        #cat-cleaning:checked~.catalog__layout label[for="cat-cleaning"],
+        #cat-electronics:checked~.catalog__layout label[for="cat-electronics"],
+        #cat-climate:checked~.catalog__layout label[for="cat-climate"] {
+            background: #007bff;
+            color: #fff;
+        }
+
+        .feedback {
+            max-width: 800px;
+            margin: 60px auto 80px;
+            padding: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .feedback__title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        .feedback__form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .feedback__group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .feedback__input,
+        .feedback__select,
+        .feedback__textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .feedback__input:focus,
+        .feedback__select:focus,
+        .feedback__textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
+        }
+
+        .feedback__submit {
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            /* transition на hover по ТЗ */
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .feedback__submit:hover {
+            background: linear-gradient(135deg, #0056b3, #0099cc);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .catalog__card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .catalog__layout {
+                flex-direction: column;
+            }
+
+            .catalog__sidebar {
+                flex: none;
+                width: 100%;
+            }
+
+            .catalog__card {
+                width: 100%;
+            }
+
+            .feedback {
+                margin: 40px 20px;
+                padding: 25px;
+            }
+
+            .main-header {
+                padding: 10px 20px;
+                flex-wrap: wrap;
+                height: auto;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                order: 4;
+                padding: 15px 0;
+            }
+
+            .search-form {
+                order: 3;
+                width: 100%;
+                max-width: none;
+                margin: 10px 0;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo"><a href="main.html"><img src="assets/logo.png" alt="TechHome"></a></div>
+        <div class="search-form">
+            <input type="text" placeholder="Поиск по товарам...">
+            <button type="submit">🔍</button>
+        </div>
+        <nav>
+            <a href="main.html" class="nav-link">Главная</a>
+            <a href="catalog.html" class="nav-link">Каталог</a>
+            <a href="" class="nav-link">Контакты</a>
+            <a href="" class="nav-link">Корзина</a>
+            <a href="info.html" class="nav-link">Об оплате</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">Каталог товаров</h1>
+
+        <!-- Скрытые радио-кнопки для CSS-фильтра (обязательно ДО layout) -->
+        <input type="radio" id="cat-all" name="category" value="all" checked class="filter__radio">
+        <input type="radio" id="cat-kitchen" name="category" value="kitchen" class="filter__radio">
+        <input type="radio" id="cat-cleaning" name="category" value="cleaning" class="filter__radio">
+        <input type="radio" id="cat-electronics" name="category" value="electronics" class="filter__radio">
+        <input type="radio" id="cat-climate" name="category" value="climate" class="filter__radio">
+
+        <div class="catalog__layout">
+            <aside class="catalog__sidebar">
+                <form class="filter__form" action="#" method="get">
+                    <h2 class="filter__title">Фильтр товаров</h2>
+
+                    <fieldset class="filter__group">
+                        <legend class="filter__legend">Категория</legend>
+                        <label for="cat-all" class="filter__label">Все товары</label>
+                        <label for="cat-kitchen" class="filter__label">Кухня</label>
+                        <label for="cat-cleaning" class="filter__label">Уборка</label>
+                        <label for="cat-electronics" class="filter__label">Электроника</label>
+                        <label for="cat-climate" class="filter__label">Климат</label>
+                    </fieldset>
+
+                    <fieldset class="filter__group">
+                        <legend class="filter__legend">Производитель</legend>
+                        <label class="filter__radio-label">
+                            <input type="radio" name="brand" value="all" class="filter__input" checked> Все
+                        </label>
+                        <label class="filter__radio-label">
+                            <input type="radio" name="brand" value="smart" class="filter__input"> SmartTech
+                        </label>
+                        <label class="filter__radio-label">
+                            <input type="radio" name="brand" value="home" class="filter__input"> HomePro
+                        </label>
+                    </fieldset>
+
+                    <div class="filter__group">
+                        <label for="sortSelect" class="filter__label">Сортировка</label>
+                        <select id="sortSelect" name="sort" class="filter__select">
+                            <option value="default">По умолчанию</option>
+                            <option value="price-asc">Сначала дешёвые</option>
+                            <option value="price-desc">Сначала дорогие</option>
+                        </select>
+                    </div>
+                </form>
+            </aside>
+
+            <!-- 📦 Сетка товаров -->
+            <section class="catalog__grid">
+                <article class="catalog__card" data-cat="cleaning">
+                    <div class="catalog__image"><img src="catalog_assets/robot.jpg" alt="Робот-пылесос SmartClean Pro">
+                    </div>
+                    <div class="catalog__info">
+                        <span class="promo-badge">Хит</span>
+                        <h3 class="catalog__title-card">Робот-пылесос SmartClean Pro</h3>
+                        <p class="catalog__desc">Лазерная навигация, влажная уборка, управление со смартфона</p>
+                        <div class="catalog__price">19 990 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="kitchen">
+                    <div class="catalog__image"><img src="catalog_assets/fridge.jpg" alt="Холодильник FrostGuard"></div>
+                    <div class="catalog__info">
+                        <h3 class="catalog__title-card">Холодильник FrostGuard</h3>
+                        <p class="catalog__desc">NoFrost, энергокласс A++, объём 350 л</p>
+                        <div class="catalog__price">152 999 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="kitchen">
+                    <div class="catalog__image"><img src="catalog_assets/coffee.jpg" alt="Кофемашина BrewMaster"></div>
+                    <div class="catalog__info">
+                        <span class="promo-badge">Новинка</span>
+                        <h3 class="catalog__title-card">Кофемашина BrewMaster</h3>
+                        <p class="catalog__desc">Автоматическая, 15 бар, капучинатор</p>
+                        <div class="catalog__price">15 999 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="cleaning">
+                    <div class="catalog__image"><img src="catalog_assets/machine.jpg" alt="Стиральная машина WashPro">
+                    </div>
+                    <div class="catalog__info">
+                        <h3 class="catalog__title-card">Стиральная машина WashPro</h3>
+                        <p class="catalog__desc">Загрузка 8 кг, 1200 об/мин, защита от протечек</p>
+                        <div class="catalog__price">29 999 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="electronics">
+                    <div class="catalog__image"><img src="catalog_assets/tv.png" alt="Телевизор VisionMax 55&quot;">
+                    </div>
+                    <div class="catalog__info">
+                        <span class="promo-badge">-20%</span>
+                        <h3 class="catalog__title-card">Телевизор VisionMax 55"</h3>
+                        <p class="catalog__desc">4K UHD, Smart TV, HDR10+, Dolby Atmos</p>
+                        <div class="catalog__price">110 000 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="kitchen">
+                    <div class="catalog__image"><img src="catalog_assets/tea.jpg" alt="Электрический чайник BoilFast">
+                    </div>
+                    <div class="catalog__info">
+                        <h3 class="catalog__title-card">Электрический чайник BoilFast</h3>
+                        <p class="catalog__desc">1.7 л, быстрый нагрев, автоотключение</p>
+                        <div class="catalog__price">3 790 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="kitchen">
+                    <div class="catalog__image"><img src="catalog_assets/microwave.jpg"
+                            alt="Микроволновая печь HeatWave"></div>
+                    <div class="catalog__info">
+                        <h3 class="catalog__title-card">Микроволновая печь HeatWave</h3>
+                        <p class="catalog__desc">20 л, гриль, 8 автопрограмм, сенсорное управление</p>
+                        <div class="catalog__price">8 490 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="climate">
+                    <div class="catalog__image"><img src="catalog_assets/air.jpg" alt="Увлажнитель воздуха AirFresh">
+                    </div>
+                    <div class="catalog__info">
+                        <span class="promo-badge">Эко</span>
+                        <h3 class="catalog__title-card">Увлажнитель воздуха AirFresh</h3>
+                        <p class="catalog__desc">Ультразвуковой, 5 л, таймер, ароматизация</p>
+                        <div class="catalog__price">4 290 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="kitchen">
+                    <div class="catalog__image"><img src="catalog_assets/blend.jpg" alt="Погружной блендер MixPro">
+                    </div>
+                    <div class="catalog__info">
+                        <h3 class="catalog__title-card">Погружной блендер MixPro</h3>
+                        <p class="catalog__desc">800 Вт, 5 скоростей, насадки в комплекте</p>
+                        <div class="catalog__price">2 990 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="cleaning">
+                    <div class="catalog__image"><img src="catalog_assets/utug.jpg" alt="Паровой утюг SteamGlide"></div>
+                    <div class="catalog__info">
+                        <h3 class="catalog__title-card">Паровой утюг SteamGlide</h3>
+                        <p class="catalog__desc">Керамическая подошва, паровой удар 200 г/мин</p>
+                        <div class="catalog__price">5 490 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="kitchen">
+                    <div class="catalog__image"><img src="catalog_assets/elecity_main.jpg"
+                            alt="Кухонная вытяжка AirClean"></div>
+                    <div class="catalog__info">
+                        <h3 class="catalog__title-card">Кухонная вытяжка AirClean</h3>
+                        <p class="catalog__desc">60 см, 3 скорости, угольный фильтр, подсветка</p>
+                        <div class="catalog__price">7 890 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+
+                <article class="catalog__card" data-cat="kitchen">
+                    <div class="catalog__image"><img src="catalog_assets/orig.png" alt="Мультиварка CookSmart"></div>
+                    <div class="catalog__info">
+                        <span class="promo-badge">Хит</span>
+                        <h3 class="catalog__title-card">Мультиварка CookSmart</h3>
+                        <p class="catalog__desc">5 л, 12 программ, отложенный старт, мультиварка-скороварка</p>
+                        <div class="catalog__price">6 790 ₽</div>
+                        <button class="catalog__btn" type="button">В корзину</button>
+                    </div>
+                </article>
+            </section>
+        </div>
+
+        <!-- 📩 Форма обратной связи -->
+        <section class="feedback">
+            <h2 class="feedback__title">Обратная связь</h2>
+            <form class="feedback__form" action="#" method="POST">
+                <div class="feedback__group">
+                    <label for="userName" class="feedback__label">Имя *</label>
+                    <input type="text" id="userName" name="name" class="feedback__input" required
+                        placeholder="Иван Иванов">
+                </div>
+                <div class="feedback__group">
+                    <label for="userEmail" class="feedback__label">Email *</label>
+                    <input type="email" id="userEmail" name="email" class="feedback__input" required
+                        placeholder="example@mail.ru">
+                </div>
+                <div class="feedback__group">
+                    <label for="userTopic" class="feedback__label">Тема сообщения *</label>
+                    <select id="userTopic" name="topic" class="feedback__select" required>
+                        <option value="" disabled selected>Выберите тему</option>
+                        <option value="product">Вопрос о товаре</option>
+                        <option value="order">Статус заказа</option>
+                        <option value="delivery">Доставка и оплата</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                <div class="feedback__group">
+                    <label for="userMessage" class="feedback__label">Сообщение *</label>
+                    <textarea id="userMessage" name="message" class="feedback__textarea" rows="5" required
+                        placeholder="Опишите ваш вопрос или предложение..."></textarea>
+                </div>
+                <button type="submit" class="feedback__submit">Отправить</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <a href="mailto:fon4ikoff2017@gmail.com">fon4ikoff2017@gmail.com</a><br>
+            <a href="tel:+79005907781">+7 (900) 590-77-81</a><br>
+            Разработчик: Фончиков Евгений Алексеевич<br>
+            © 2026 Все права защищены
+        </p>
+    </footer>
+</body>
+
+</html>

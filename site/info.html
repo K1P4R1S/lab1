@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата и доставка - TechHome</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* === Страница "Оплата и доставка" === */
+
+        .page-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            color: #333;
+            font-size: 2rem;
+        }
+
+        .info-section {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        /* Иконки платежных систем (текстовые бейджи) */
+        .payment-icons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .payment-badge {
+            height: 40px;
+            padding: 0 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-badge.visa {
+            background: linear-gradient(135deg, #1a1f71, #2a34a8);
+        }
+
+        .payment-badge.mastercard {
+            background: linear-gradient(135deg, #eb001b, #f79e1b);
+        }
+
+        .payment-badge.paypal {
+            background: linear-gradient(135deg, #003087, #009cde);
+        }
+
+        .payment-badge.mir {
+            background: linear-gradient(135deg, #00a651, #00d97e);
+        }
+
+        /* Список способов оплаты */
+        .payment-methods-list h3,
+        .delivery-card h3 {
+            color: #333;
+            margin: 20px 0 10px;
+            font-size: 1.3rem;
+        }
+
+        .payment-methods-list p {
+            line-height: 1.8;
+            color: #555;
+            margin: 0 0 15px 0;
+        }
+
+        /* Карточки доставки */
+        .delivery-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .delivery-card ul {
+            margin: 10px 0;
+            padding-left: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .delivery-note {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f3ff;
+            border-left: 4px solid #007bff;
+            border-radius: 5px;
+            color: #333;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <a href="main.html">
+                <img src="assets/logo.png" alt="TechHome Logo">
+            </a>
+        </div>
+        <div class="search-form">
+            <input type="text" placeholder="Поиск по товарам...">
+            <button type="submit">🔍</button>
+        </div>
+        <nav>
+            <a href="main.html" class="nav-link">Главная</a>
+            <a href="catalog.html" class="nav-link">Каталог</a>
+            <a href="" class="nav-link">Контакты</a>
+            <a href="" class="nav-link">Корзина</a>
+            <a href="info.html" class="nav-link">Об оплате</a>
+        </nav>
+
+    </header>
+
+    <main>
+        <h1 class="page-title">Оплата и доставка</h1>
+
+        <!-- Section: Payment Methods -->
+        <section class="info-section">
+            <h2 class="section-title">Способы оплаты</h2>
+
+            <div class="payment-icons">
+                <div class="payment-badge visa">Visa</div>
+                <div class="payment-badge mastercard">Mastercard</div>
+                <div class="payment-badge paypal">PayPal</div>
+                <div class="payment-badge mir">Мир</div>
+            </div>
+
+            <div class="payment-methods-list">
+                <h3>💳 Оплата банковской картой онлайн</h3>
+                <p>Принимаем карты Visa, Mastercard и МИР. Оплата происходит через защищенный платежный шлюз с
+                    использованием технологии 3D Secure.</p>
+
+                <h3>💵 Оплата при получении</h3>
+                <p>Оплатите заказ наличными или банковской картой курьеру при доставке. Доступно для Москвы,
+                    Санкт-Петербурга и других городов.</p>
+
+                <h3>🏦 Безналичный расчет</h3>
+                <p>Для юридических лиц предоставляем возможность оплаты по безналичному расчету с НДС. Выставим счет в
+                    течение 1 часа.</p>
+
+                <h3>📱 Электронные кошельки</h3>
+                <p>Принимаем оплату через PayPal, Яндекс.Деньги, WebMoney и другие популярные платежные системы.</p>
+            </div>
+        </section>
+
+        <!-- Section: Delivery Information -->
+        <section class="info-section">
+            <h2 class="section-title">Доставка</h2>
+
+            <div class="delivery-options">
+                <div class="delivery-card">
+                    <h3>🚚 Курьерская доставка по Москве и СПб</h3>
+                    <ul>
+                        <li><strong>Стандартная доставка:</strong> 500 ₽ (1-3 дня)</li>
+                        <li><strong>Экспресс доставка:</strong> 900 ₽ (в день заказа)</li>
+                        <li><strong>Бесплатно:</strong> при заказе от 15 000 ₽</li>
+                    </ul>
+                </div>
+
+                <div class="delivery-card">
+                    <h3>📦 Доставка по России</h3>
+                    <ul>
+                        <li><strong>Почта России:</strong> от 350 ₽ (5-14 дней)</li>
+                        <li><strong>СДЭК:</strong> от 450 ₽ (3-7 дней)</li>
+                        <li><strong>Boxberry:</strong> от 300 ₽ (4-10 дней)</li>
+                        <li><strong>Бесплатно:</strong> при заказе от 25 000 ₽</li>
+                    </ul>
+                </div>
+
+                <div class="delivery-card">
+                    <h3>🏪 Самовывоз</h3>
+                    <ul>
+                        <li><strong>Пункты выдачи в Москве:</strong> бесплатно</li>
+                        <li><strong>Пункты выдачи в СПб:</strong> бесплатно</li>
+                        <li>Готовность заказа: 1-2 дня</li>
+                    </ul>
+                </div>
+
+                <div class="delivery-note">
+                    <strong>💡 Важно:</strong> При заказе крупной бытовой техники (холодильники, стиральные машины)
+                    доставка осуществляется до подъезда. Подъем на этаж оплачивается отдельно: 500 ₽ за этаж (кроме
+                    первого).
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <a href="mailto:fon4ikoff2017@gmail.com">fon4ikoff2017@gmail.com</a><br>
+            <a href="tel:+79005907781">+7 (900) 590-77-81</a><br>
+            Разработчик: Фончиков Евгений Алексеевич<br>
+            © 2026 Все права защищены
+        </p>
+    </footer>
+</body>
+
+</html>

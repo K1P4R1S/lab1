@@ -1,0 +1,39 @@
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4; 
+            font-family: sans-serif;
+        }
+
+        .progress-container {
+            width: 600px; 
+            height: 60px; 
+            border: 5px solid #ff9800; 
+            background-color: #ffffff;
+            overflow: hidden;
+            position: relative;
+            
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 25%; 
+            background-color: #ff9800; 
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: moveRight 2.5s linear infinite;
+        }
+
+        @keyframes moveRight {
+            0% {
+                transform: translateX(-100%); 
+            }
+
+            100% {
+                transform: translateX(500%); 
+            }
+        }

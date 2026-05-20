@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 2: UI Kit Forms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="kit-container">
+
+        <div class="section-block">
+            <h3>Inputs</h3>
+            <div class="input-row">
+                <div class="input-group">
+                    <input type="text" class="form-input" placeholder="Enter some text">
+                </div>
+                <div class="input-group valid">
+                    <input type="text" class="form-input" value="valid text">
+                    <i class="fas fa-check input-icon"></i>
+                </div>
+                <div class="input-group invalid">
+                    <input type="text" class="form-input" value="invalid text">
+                    <i class="fas fa-times input-icon"></i>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section-block">
+            <h3>Check boxes</h3>
+            <div class="toggle-row">
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                    Subscribe
+                </label>
+                <label class="switch red">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                    Subscribe
+                </label>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <h3>Radio buttons</h3>
+            <div class="radio-row">
+                <span style="font-size:14px; font-weight:600; margin-right:10px;">Gender:</span>
+                <label class="radio-label">
+                    <input type="radio" name="gender" checked>
+                    <span class="radio-circle"></span>
+                    Male
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="gender">
+                    <span class="radio-circle"></span>
+                    Female
+                </label>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <h3>Buttons</h3>
+            <div class="btn-row">
+                <button class="btn btn-green">Active</button>
+                <button class="btn btn-green-dark">Hover</button>
+                <button class="btn btn-red">Danger</button>
+                <button class="btn btn-red-dark">Hover</button>
+                <button class="btn btn-disabled" disabled>Disabled</button>
+                <button class="btn btn-circle btn-green">+</button>
+                <button class="btn btn-circle btn-red">-</button>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <h3>Text area</h3>
+            <textarea class="form-textarea" placeholder="Enter some text"></textarea>
+        </div>
+
+    </div>
+
+</body>
+</html>
