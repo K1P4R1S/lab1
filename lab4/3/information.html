@@ -1,51 +1,45 @@
 <!DOCTYPE html>
-<html lang="ru">
-
+<html lang="en">
 <head>
-
     <meta charset="UTF-8">
-    <title>Задание №3 — Информация о событии</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
     <link rel="stylesheet" href="styles.css">
-
 </head>
-
 <body>
-
-    <div class="event">
-
-        <img class="event__image" src="img/1.jpg" alt="Легенда">
-
-        <div class="event__body">
-
-            <p class="event__date">📅 11 июня 2026(чт) 18:30</p>
-
-            <h1 class="event__title">Концертная программа "Легенда"</h1>
-
-            <p class="event__description">
-                ЛЕГЕНДА - это НАША история, традиции. А точнее всего мира. Что есть Легенда и как к ней относиться — над
-                этим вопросом размышляли многие исследователи. В наше время нередко бытует мнение, что Легенды — это
-                выдумка народа, мечтавшего о чём-то прекрасном и несбыточном, то есть сказка и не более того. Вероятно,
-                поводом к этому является то, что в Легендах часто показаны невероятные, волшебные события, а герои
-                совершают действия, невозможные с точки зрения современного человека... Мы же попытаемся посмотреть на
-                Легенды, как на древнюю историю, — пусть и приукрашенную, но имеющую правдивое основание. Это и поможет
-                нам убедиться, что их герои — реально существовавшие люди разных эпох, совершавшие подвиги и
-                запечатлённые в исторических документах — в летописях и воспоминаниях современников. Интересно, а может
-                ли каждый из нас стать той самой Легендой?
-            </p>
-
-            <div class="event__meta">
-                <span>📍 Владимир, ул. Мира, д. 55 ДК Молодежи</span>
-                <span>🎟 Вход: 450 ₽</span>
+    <header class="event-header">
+        <nav class="navpath">
+            Home / Articles /
+        </nav>
+        <h1 class="event-title">
+            The Difference Between <br>
+            Responsive and <br>
+            Adaptive Design
+        </h1>
+        <div class="meta-container">
+            <div class="author-avatar">
+                <img src="img/profile_picture.png" alt="Geoff Graham">
             </div>
 
-            <button class="event__button">Купить билет</button>
-
+            <div class="meta-info">
+                <div class="meta-item author">
+                    <span class="label">Author</span>
+                    <span class="value">Geoff Graham</span>
+                </div>
+                <div class="meta-item comments">
+                    <span class="label">49 Comments</span>
+                    <span class="value">Go to comments</span>
+                </div>
+                <div class="meta-item published">
+                    <span class="label">Published</span>
+                    <span class="value">Nov 11, 2018</span>
+                </div>
+                <div class="meta-item updated">
+                    <span class="label">Updated</span>
+                    <span class="value">Nov 17, 2018</span>
+                </div>
+            </div>
         </div>
-
-    </div>
-
+    </header>
 </body>
-
 </html>
